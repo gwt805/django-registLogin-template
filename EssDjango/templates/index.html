@@ -1,13 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="/static/imgs/logo_source.jpg" type="image/x-icon" />
+    <link rel="shortcut icon" href="/static/imgs/logo_ess.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/static/css/index.css">
+    <link rel="stylesheet" href="/static/lib/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="/static/lib/jquery/1.9.1/jquery.min.js"></script>
+    <script src="/static/lib/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/static/lib/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/lib/datatables/css/jquery.dataTables.min.css">
+    <script src="/static/lib/datatables/js/jquery.dataTables.min.js"></script>
     <title>首页</title>
 </head>
+
 <body>
-    <h1>欢迎来到首页</h1>
+    <div class="content">
+        <!-- body left -->
+        <div class="menu-box">
+            <!-- 侧边栏的标题 开始 -->
+            <div class="menu-tittle">
+                <div>
+                    <img src="/static/imgs/logo_ess.png" alt="ESS" draggable="false">
+                    <h3 id="name"></h3>
+                </div>
+            </div>
+            <!-- 侧边栏的标题 结束 -->
+            <div class="menu">
+                <!-- 每一页的导航 -->
+                <!-- 导航一 -->
+                <div class="menu-item">
+                    <input type="checkbox" id="menu-item3">
+                    <label for="menu-item3">
+                        <i class="fa fa-user"></i>
+                        <span>个人资料</span>
+                        <i class="fa fa-angle-down"></i>
+                    </label>
+                    <div class="menu-content">
+                        <span><i class="fa fa-user"></i>个人资料</span>
+                    </div>
+                </div>
+                <!-- 导航二 -->
+                <div class="menu-item">
+                    <input type="checkbox" id="menu-item1">
+                    <label for="menu-item1">
+                        <i class="fa fa-user"></i>
+                        <span>内部相关</span>
+                        <i class="fa fa-angle-down"></i>
+                    </label>
+                    <div class="menu-content">
+                        <span onclick="test()"><i class="fa fa-user"></i>添加数据</span>
+                        <span><i class="fa fa-user"></i>展示个人当天数据</span>
+                        <span><i class="fa fa-user"></i>展示个人所有数据</span>
+                        <span><i class="fa fa-user"></i>展示所有人当天数据</span>
+                        <span><i class="fa fa-user"></i>展示所有数据</span>
+                        <span><i class="fa fa-user"></i>搜索</span>
+                        <span><i class="fa fa-bar-chart"></i>图表展示</span>
+                        <span><i class="fa fa-remove"></i>批量删除</span>
+                        <span><i class="fa fa-user"></i>效率查看</span>
+                        <span><i class="fa fa-user"></i>绩效查看</span>
+                    </div>
+                </div>
+                <!-- 导航三 -->
+                <div class="menu-item">
+                    <input type="checkbox" id="menu-item2">
+                    <label for="menu-item2">
+                        <i class="fa fa-user"></i>
+                        <span>供应商相关</span>
+                        <i class="fa fa-angle-down"></i>
+                    </label>
+                    <div class="menu-content">
+                        <span><i class="fa fa-user"></i>添加数据</span>
+                        <span><i class="fa fa-user"></i>展示数据</span>
+                        <span><i class="fa fa-user"></i>搜索</span>
+                        <span><i class="fa fa-user"></i>图表展示</span>
+                    </div>
+                </div>
+                <!-- 每页的导航结束 -->
+            </div>
+            <div class="btm">
+                <div>
+                    <div onclick="return window.open('/ess/admin')">
+                        <label>
+                            <i class="fa fa-cog"></i>
+                            <span>设置</span>
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            <i class="fa fa-power-off"></i>
+                            <span>注销</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- body right -->
+        <div class="rbody">
+            <div class="nei_showAll panel panel-defaul">
+                <div class="panel-heading">
+                    <button class="btn ">添加</button>
+                    <button class="btn btn-warning">修改</button>
+                    <button class="btn btn-danger">删除</button>
+                </div>
+                <table class="table table-hover table-responsive" id="nei_showAll">
+                    <thead>
+                        <th>ID</th>
+                        <th>用户名</th>
+                        <th>项目名字</th>
+                        <th>数据标注方</th>
+                        <th>任务ID</th>
+                        <th>当天日期</th>
+                        <th>任务类型</th>
+                        <th>图片数量</th>
+                        <th>框数</th>
+                        <th>工时</th>
+                    </thead>
+                    <tbody id="nei_showAll_tbody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </body>
+<script src="/static/js/index.js"></script>
+<script src="/static/js/disable.js"></script>
+<script src="/static/js/click_yh.js"></script>
+<script>
+    function test() {
+        $.ajax("/ess/nshowall", {
+            method: "GET",
+            data: {},
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                $("#nei_showAll").DataTable().destroy(); //再次click后，先将datatable删除
+                var str = "";
+                $("#nei_showAll_tbody").html("");
+                for (var i in data.data) {
+                    str += "<tr>" +
+                        "<td>" + data.data[i].id + "</td>" +
+                        "<td>" + data.data[i].uname + "</td>" +
+                        "<td>" + data.data[i].pname + "</td>" +
+                        "<td>" + data.data[i].waibao + "</td>" +
+                        "<td>" + data.data[i].taskId + "</td>" +
+                        "<td>" + data.data[i].dtime + "</td>" +
+                        "<td>" + data.data[i].tkinds + "</td>" +
+                        "<td>" + data.data[i].pnums + "</td>" +
+                        "<td>" + data.data[i].knums + "</td>" +
+                        "<td>" + data.data[i].ptimes + "</td>" +
+                        "</tr>"
+                }
+                $("#nei_showAll_tbody").html(str);
+
+                $('#nei_showAll').dataTable({
+                    "bLengthChange": false, //开关，是否显示每页显示多少条数据的下拉框
+                    "aLengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "所有"]],//设置每页显示数据条数的下拉选项
+                    'iDisplayLength': 20, //每页初始显示5条记录
+                    'bFilter': true,  //是否使用内置的过滤功能（是否去掉搜索框）
+                    "bInfo": true, //开关，是否显示表格的一些信息(当前显示XX-XX条数据，共XX条)
+                    "bPaginate": true, //开关，是否显示分页器
+                    "bSort": true, //是否可排序 
+                    "oLanguage": {  //语言转换
+                        "sInfo": "显示第 _START_ 至 _END_ 项结果, 共_TOTAL_ 项",
+                        "sLengthMenu": "每页显示 _MENU_ 项结果",
+                        "sSearch": "搜索",
+                        "oPaginate": {
+                            "sFirst": "首页",
+                            "sPrevious": "前一页",
+                            "sNext": "后一页",
+                            "sLast": "尾页"
+                        }
+                    }
+                });
+            },
+            error: function (data) { alert(data) }
+        })
+    }
+</script>
+
 </html>

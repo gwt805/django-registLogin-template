@@ -1,20 +1,195 @@
 * {
-    margin: 0;
+    margin: -1px 0 0 0 ;
     padding: 0;
-}
-
-body {
-    overflow: hidden;
-    background-image: url("../imgs/background.png");
-    /* background-color: rgb(1, 48, 98); */
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position-x: center;
-    width: 100%;
-    height: 100%;
     cursor: url("../imgs/mouse.png"), default;
 }
+
+.content {
+    width: 100%;
+    height: 100%;
+}
+
+.content .rbody {
+    width:88.57%;
+    height: 100vh;
+    border: 1px solid red;
+    position: fixed;
+    overflow-y: auto;
+    margin-left: 220px;
+    /* background-color: rgb(3, 73, 120); */
+}
+/* .content table {
+    background-color: transparent;
+} */
+
+.menu-box .menu-tittle, .menu, .btm {
+    position: absolute;
+}
+
+.menu-box .menu {
+    margin-top: 100px;
+}
+
+.menu-box .btm {
+    bottom: 0;
+    width: 100%;
+    left: 0;
+}
+.menu-box .btm div:first-child {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 24px;
+}
+
+.menu-box .btm div div label span {
+    font-weight: 400;
+}
+
+.menu-box {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    letter-spacing: 0.5px;
+    width: 220px;
+    min-height: 100vh;
+    padding: 6px 12px;
+    box-sizing: border-box;
+    float: left;
+    background-color: rgb(3, 73, 120);
+    position: fixed;
+    color: #fff;
+}
+
+.menu-box input {
+    display: none;
+}
+
+.menu-tittle {
+    margin-bottom: 20px;
+}
+
+.menu-tittle div img {
+    width: 100px;
+    height: 50px;
+    margin-top: 10px;
+    float: left;
+}
+
+.menu-tittle div h3 {
+    display: block;
+    float: left;
+    margin-left: 10px;
+}
+
+.menu-box>label {
+    position: absolute;
+    top: 48%;
+    right: 0;
+    transform: translateX(50%);
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 4px 0px #000;
+    background-color: rgb(38, 128, 189);
+}
+
+.menu {
+    font-size: 18px;
+    height: 83%;
+    overflow: hidden;
+    transition: width 0.2s;
+    /* color: #; */
+    overflow-y: auto;
+}
+
+.menu .menu-item {
+    margin-bottom: 20px;
+}
+
+.menu-item>label {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 30px;
+    border-radius: 2px;
+    
+}
+
+.menu-item>label>i:first-child {
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+.menu-item>label>span {
+    font-weight: 400;
+    flex: 1;
+}
+
+.menu-item>label>i:last-child {
+    flex: none;
+    font-size: 20px;
+    font-weight: 900;
+}
+
+.menu-item>input:checked ~label i:last-child {
+    /* 这里前两行解决 下拉图标翻转位置不正确 问题 */
+    position: relative;
+    top: -10px;
+    transform: rotate(180deg);
+}
+
+.menu-content {
+    height: 0;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    transition: 0.5s;
+}
+
+.menu-content span {
+    padding-top: 10px;
+    margin-left: -20px;
+    font-size: 15px;
+}
+
+.menu-content span i {
+    padding-right: 10px;
+}
+
+/* 选项，若 n 项， 就 n * 40px */
+.menu-item>input#menu-item3:checked~.menu-content {
+    height: calc(1*40px);
+    transition: 0.5s;
+}
+.menu-item>input#menu-item1:checked~.menu-content {
+    height: calc(10*40px);
+    transition: 0.5s;
+}
+.menu-item>input#menu-item2:checked~.menu-content {
+    height: calc(4*40px);
+    transition: 0.5s;
+}
+
+.menu-content>span {
+    width: 100%;
+    text-indent: 20px;
+    line-height: 20px;
+    border-radius: 2px;
+}
+
+.menu-content>span:hover {
+    background-color: rgb(38, 128, 189);
+}
+
+/* 侧边栏结束 */
+
+/* 右边主体 */
+
+
+
+
+
+
+
 
 ::-webkit-scrollbar {
     width: 7px;
@@ -38,108 +213,4 @@ body {
 
 ::-webkit-scrollbar-thumb:active {
     background-color: #aaa;
-}
-
-
-.wt-div {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Droid Sans", "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", "Droid Sans Fallback", "Microsoft YaHei", sans-serif;
-
-}
-
-.tittle {
-    width: 100%;
-    height: 50px;
-    display: flex;
-    /* justify-content: space-around; */
-    justify-content: space-between;
-    position: fixed;
-    top: 0;
-    z-index: 1;
-}
-
-.tittle span {
-    font-size: 20px;
-    line-height: 50px;
-    color: white;
-}
-.tittle span:nth-child(2):hover{
-    color: gray;
-}
-
-.middle {
-    border-top: 1px solid gray;
-    width: 100%;
-    height: 85%;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 115px);
-    grid-gap: 50px;
-    grid-row: auto;
-    justify-content: space-around;
-    position: fixed;
-    top: 60px;
-    overflow: auto;
-}
-
-.middle div {
-    width: 100px;
-    height: 100px;
-    background-color: rgb(44, 51, 90);
-    opacity: 0.7;
-    color: #fff;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    text-align: center;
-    display: flex;
-    flex-direction: column-reverse;
-    border-radius: 5px;
-}
-
-.middle div:hover {
-    /* opacity: 0.6; */
-    background: rgb(83, 97, 155);
-}
-
-.middle div img {
-    width: 40px;
-    position: relative;
-    top: -50px;
-    left: 30px;
-}
-
-.middle div p {
-    width: 80%;
-    margin: auto;
-    overflow: hidden;
-    position: relative;
-    top: 45px;
-    font-size: 16px;
-}
-
-.footer {
-    width: 100%;
-    height: 8.6%;
-    position: fixed;
-    top: 91.4%;
-    color: #fff;
-    text-align: center;
-    font-size: 20px;
-    word-break: break-all;
-    word-wrap: break-word;
-}
-
-.footer span:nth-child(2) {
-    margin-left: 2%;
-}
-
-.footer span:nth-child(3) {
-    margin-left: 1%;
-}
-
-.footer span svg:hover,img:hover {
-    opacity: 0.7;
-    cursor: url("../imgs/mouse.png"), default;
 }

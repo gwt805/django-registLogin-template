@@ -16,7 +16,7 @@ Django 登录注册模板，管理员可在后台更改用户密码等信息；�
 
 3. python manage.py migrate
 
-4. python manage.py runserver 地址 端口；eg: python manage.py runserver 0.0.0.0 80
+4. python manage.py runserver 地址:端口；eg: python manage.py runserver 0.0.0.0:80
 
 在执行第四步之前，可以先创建一个超级/管理员账号: python manage.py createsuperuser, 然后根据提示填写即可
 

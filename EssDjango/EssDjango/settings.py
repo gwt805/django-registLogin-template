@@ -25,9 +25,9 @@ CONFIG = json.load(open(os.path.join(BASE_DIR, 'config.json')))
 SECRET_KEY = 'django-insecure-kbu2jxnft+9xns^gv1nw&ic^n*j&^fl8q!*2t$eko^gmbw$@rg'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-AUTH_USER_MODEL = 'Ess.User' # app下的 用户model
+AUTH_USER_MODEL = 'Ess.User'
 
 ALLOWED_HOSTS = ["*"]
 

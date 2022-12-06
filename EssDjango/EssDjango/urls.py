@@ -18,6 +18,6 @@ from django.urls import path, include
 import Ess
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('ess/admin/', admin.site.urls),
     path('ess/', include('Ess.urls')),
 ]

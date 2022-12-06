@@ -7,6 +7,7 @@ urlpatterns = [
     path('regist/', views.regist),
     path('login/', views.login),
     path('index/', views.index),
+    path('nshowall', views.nei_showAll),
     re_path(
         "^static/(?P<path>.*)$",
         static.serve,

@@ -3,7 +3,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <link rel="shortcut icon" href="/static/imgs/logo_source.jpg" type="image/x-icon" />
+  <link rel="shortcut icon" href="/static/imgs/logo_ess.jpg" type="image/x-icon" />
   <link href="/static/css/login.css" rel="stylesheet" type="text/css">
   <title>登录</title>
 </head>
@@ -40,8 +40,8 @@
   <script>
     function login() {
       $.ajaxSetup({
-          data: { csrfmiddlewaretoken: '{{ csrf_token }}' },
-        });
+        data: { csrfmiddlewaretoken: '{{ csrf_token }}' },
+      });
       $.ajax("/ess/login/", {
         method: "POST",
         contentType: "application/json; charset=utf-8",
@@ -52,14 +52,18 @@
         },
       }).done(function (res) {
         if (res && res.data == "successful") {
-          console.log(res.zhuname)
+          // console.log(res.zhuname)
           //设置Cookie中的名称与值以及过期时间【单位：天】
-            // var expires = new Date();
-            // expires.setTime(expires.getTime() + 1 * 24 * 60 * 60 * 1000);
-            // document.cookie = "isLogin=true;expires=" + expires.toGMTString();
-            // document.cookie = "isLogin=true;";
-            // document.cookie = "zhuname=" + res.zhuname + ";";
-          window.location.href = "/ess/index";
+          // var expires = new Date();
+          // expires.setTime(expires.getTime() + 1 * 24 * 60 * 60 * 1000);
+          // document.cookie = "isLogin=true;expires=" + expires.toGMTString();
+          // document.cookie = "isLogin=true,zhuname="+ res.zhuname;
+          sessionStorage.setItem("isLogin","true")
+          sessionStorage.setItem("zhuname",res.zhuname)
+          // sessionStorage.getItem("zhuname")
+          // sessionStorage.removeItem("isLogin")
+          // sessionStorage.removeItem("zhuname")
+          // window.location.href = "/ess/index";
         } else {
           $("#error").html(res.data);
           $("#user").val("");
@@ -67,7 +71,7 @@
         }
       });
     }
-    function regitst(){
+    function regitst() {
       window.location.href = "/ess/regist";
     }
   </script>

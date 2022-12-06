@@ -1,7 +1,8 @@
 from django.contrib.auth.hashers import make_password,check_password
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 from django.shortcuts import render
 from django.http import JsonResponse
+
 from django.views.decorators.csrf import csrf_exempt
 from EssDjango import settings
 from . import models
@@ -12,6 +13,8 @@ from email.mime.text import MIMEText
 from email.header import Header
 from loguru import logger
 from django.http import QueryDict
+import json
+from pprint import pprint
 
 
 
@@ -122,3 +125,25 @@ def login(request):
 def index(request):
 
     return render(request, "index.html")
+
+
+def nei_showAll(request):
+    data_list = []
+    query_set = models.AnnoCheckTask.objects.all()
+    for data_info in query_set:
+        data_list.append({
+            'id': data_info.id,
+            'uname': data_info.uname,
+            'pname': data_info.pname,
+            'waibao': data_info.waibao,
+            'taskId': data_info.taskId,
+            'dtime': data_info.dtime,
+            'tkinds': data_info.tkinds,
+            'pnums': data_info.pnums,
+            'knums': data_info.knums,
+            'ptimes': data_info.ptimes
+        })
+    data_dict = {}
+    data_dict['data'] = data_list
+    
+    return JsonResponse(data_dict)

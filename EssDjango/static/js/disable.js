@@ -30,8 +30,22 @@ document.oncopy = function () {
 
 // 必须登录
 $(window).load(function () {
-    if ((document.cookie).split("=")[1] != "true") {
+    // var cookie_res = document.cookie.split(";")[0].split(",")
+    // console.log(cookie_res)
+    // var isLogin = cookie_res[0].split("=")[1];
+    // var zhuname = cookie_res[1].split("=")[1];
+    // if (((document.cookie).split(";")[0]).split("=")[1] != "true") {
+    //     alert("必须登录后才能查看!");
+    //     window.location.href = "/ess/login";
+    // }else{
+    //     $("#name").html(zhuname);
+    // }
+    let isLogin = sessionStorage.getItem("isLogin");
+    let zhuname = sessionStorage.getItem("zhuname");
+    if (isLogin != 'true'){
         alert("必须登录后才能查看!");
-        window.location.href = "/";
+        window.location.href = "/ess/login";
+    }else {
+        $("#name").html(zhuname);
     }
 });
